@@ -86,4 +86,4 @@ jobs:
           repository_username: __token__
           repository_password: ${{ secrets.PYPI_TOKEN }}
         run: |
-          poetry run semantic-release publish
+          poetry run semantic-release publish --noop
