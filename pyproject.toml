@@ -2,7 +2,6 @@
 name = "transformer-embeddings"
 version = "2.1.0"
 description = "Transformer Embeddings"
-# TODO (setu): Change to email ID provided by IT.
 authors = ["Headspace Health <transformer-embeddings@headspace.com>"]
 license = "Apache-2.0"
 readme = "README.md"

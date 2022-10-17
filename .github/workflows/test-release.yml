@@ -60,10 +60,9 @@ jobs:
           fetch-depth: 0
 
       - name: Setup git
-        # TODO (setu): Add email from IT.
         run: |
           git config user.name release-transformer-embeddings
-          git config user.email <>
+          git config user.email transformer-embeddings@headspace.com
 
       - name: Set up Python
         uses: actions/setup-python@v3
