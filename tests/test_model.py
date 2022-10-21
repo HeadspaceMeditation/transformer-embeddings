@@ -22,6 +22,7 @@ from transformer_embeddings.model import (
 )
 from transformer_embeddings.poolers import mean_pooling
 
+
 MESSAGES = [
     "Lorem ipsum dolor sit amet",
     "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",

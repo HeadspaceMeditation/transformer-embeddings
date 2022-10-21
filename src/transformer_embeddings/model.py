@@ -21,6 +21,7 @@ from transformers.file_utils import ModelOutput
 
 from transformer_embeddings.helpers import compress_files
 
+
 logger = getLogger(__name__)
 
 MODEL_TARBALL = "model.tar.gz"
