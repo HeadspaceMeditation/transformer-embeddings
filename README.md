@@ -19,13 +19,18 @@
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
-## Features
+This library simplifies and streamlines the usage of encoder transformer models supported by [HuggingFace's `transformers` library](https://github.com/huggingface/transformers/) ([model hub](https://huggingface.co/models) or local) to generate embeddings for string inputs, similar to the way `sentence-transformers` does.
 
-- TODO
+## Why use this over HuggingFace's `transformers` or `sentence-transformers`?
 
-## Requirements
+Under the hood, we take care of:
 
-- TODO
+1. Can be used with any model on the HF model hub, with sensible defaults for inference.
+2. Setting the PyTorch model to `eval` mode.
+3. Using `no_grad()` when doing the forward pass.
+4. Batching, and returning back output in the format produced by HF transformers.
+5. Padding / truncating to model defaults.
+6. Moving to and from GPUs if available.
 
 ## Installation
 
@@ -33,6 +38,75 @@ You can install _Transformer Embeddings_ via [pip] from [PyPI]:
 
 ```console
 $ pip install transformer-embeddings
+```
+
+## Usage
+
+```python
+from transformer_embeddings import TransformerEmbeddings
+
+transformer = TransformerEmbeddings("model_name")
+```
+
+If you have a previously instantiated `model` and / or `tokenizer`, you can pass that in.
+
+```python
+transformer = TransformerEmbeddings(model=model, tokenizer=tokenizer)
+```
+
+```python
+transformer = TransformerEmbeddings(model_name="model_name", model=model)
+```
+
+or
+
+```python
+transformer = TransformerEmbeddings(model_name="model_name", tokenizer=tokenizer)
+```
+
+**Note:** The `model_name` should be included if only 1 of model or tokenizer are passed in.
+
+### Embeddings
+
+To get output embeddings:
+
+```python
+embeddings = transformer.encode(["Lorem ipsum dolor sit amet",
+                                 "consectetur adipiscing elit",
+                                 "sed do eiusmod tempor incididunt",
+                                 "ut labore et dolore magna aliqua."])
+embeddings.output
+```
+
+### Pooled Output
+
+To get pooled outputs:
+
+```python
+from transformer_embeddings import TransformerEmbeddings, mean_pooling
+
+transformer = TransformerEmbeddings("model_name", return_output=False, pooling_fn=mean_pooling)
+
+embeddings = transformer.encode(["Lorem ipsum dolor sit amet",
+                                "consectetur adipiscing elit",
+                                "sed do eiusmod tempor incididunt",
+                                "ut labore et dolore magna aliqua."])
+
+embeddings.pooled
+```
+
+### Exporting the Model
+
+Once you are done testing and training the model, it can be exported into a single tarball that can be uploaded to S3 using:
+
+```python
+from transformer_embeddings import TransformerEmbeddings
+
+transformer = TransformerEmbeddings("model_name")
+transformer.export(
+    additional_files=["/path/to/other/files/to/include/in/tarball.pickle"],
+    s3_path="s3://bucket/models/model-name/date-version/",
+)
 ```
 
 ## Contributing
