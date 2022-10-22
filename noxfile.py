@@ -1,5 +1,4 @@
-from nox_poetry import Session
-from nox_poetry import session
+from nox_poetry import Session, session
 
 
 @session(python=["3.7", "3.8", "3.9", "3.10"])
