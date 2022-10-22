@@ -17,6 +17,9 @@ Changelog = "https://github.com/ginger-io/transformer-embeddings/releases"
 
 [tool.poetry.dependencies]
 python = "^3.7,<3.11"
+transformers = "^4.23.1"
+torch = "^1.9.1"
+s3fs = "^2022.10.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.1.3"
