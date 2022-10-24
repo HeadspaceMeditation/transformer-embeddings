@@ -1,31 +1,50 @@
 name: Tests
 
 on:
-  - push
-  - pull_request
+  pull_request:
+  push:
+    branches: [main]
 
 jobs:
   test:
-    name: ${{ matrix.session }} ${{ matrix.python }} / ${{ matrix.os }}
+    name: ${{ matrix.python }} / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
-        include:
-          - { python: "3.7", os: "ubuntu-latest", session: "tests" }
-          - { python: "3.8", os: "ubuntu-latest", session: "tests" }
-          - { python: "3.9", os: "ubuntu-latest", session: "tests" }
-          - { python: "3.10", os: "ubuntu-latest", session: "tests" }
-          - { python: "3.7", os: "macos-latest", session: "tests" }
-          - { python: "3.8", os: "macos-latest", session: "tests" }
-          - { python: "3.9", os: "macos-latest", session: "tests" }
-          - { python: "3.10", os: "macos-latest", session: "tests" }
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.7", "3.8", "3.9", "3.10"]
 
-    env:
-      NOXSESSION: ${{ matrix.session }}
-      FORCE_COLOR: "1"
-      PRE_COMMIT_COLOR: "always"
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install Poetry
+        run: |
+          python -m pip install --upgrade pip
+          pip install "poetry==1.2.2"
+
+      - name: Install dependencies with poetry
+        env:
+          # https://github.com/python-poetry/poetry/issues/5250#issuecomment-1067193647
+          PYTHON_KEYRING_BACKEND: "keyring.backends.fail.Keyring"
+        run: |
+          poetry install --no-interaction --no-ansi
+
+      - name: Run tests with nox
+        run: |
+          poetry run nox --python ${{ matrix.python }}
+
+  release:
+    runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
@@ -33,56 +52,22 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python }}
-
-      - name: Install Poetry
-        run: |
-          python -m pip install --upgrade pip
-          pip install poetry
-
-      - name: Install dependencies with poetry
-        run: |
-          poetry install --no-interaction --no-ansi
-
-      - name: Run tests with nox
-        run: |
-          poetry run nox
-
-  release:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+          python-version: 3.8
 
       - name: Setup git
         run: |
           git config user.name release-transformer-embeddings
           git config user.email transformer-embeddings@headspace.com
 
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: 3.8
-
-      - name: Install Poetry
+      - name: Install Poetry, dependencies, release
+        if: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           python -m pip install --upgrade pip
           pip install poetry
-
-      - name: Install dependencies with poetry
-        run: |
           poetry install --no-interaction --no-ansi --only release
-
-      - name: Release
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          repository_username: __token__
-          repository_password: ${{ secrets.PYPI_TOKEN }}
-        run: |
           poetry run semantic-release publish --noop
