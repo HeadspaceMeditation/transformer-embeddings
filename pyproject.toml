@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "transformer-embeddings"
-version = "2.1.1"
+version = "2.2.0"
 description = "Transformer Embeddings"
 authors = ["Headspace Health <transformer-embeddings@headspace.com>"]
 license = "Apache-2.0"
@@ -43,6 +43,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
 version_source = "tag"  # Resolution for https://github.com/relekang/python-semantic-release/issues/460#issuecomment-1192261285
+commit_version_number = true
 version_variable = "src/transformer_embeddings/__init__.py:__version__"
 version_toml = "pyproject.toml:tool.poetry.version"
 branch = "main"
