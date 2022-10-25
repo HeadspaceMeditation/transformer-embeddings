@@ -42,6 +42,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
+version_source = "tag"  # Resolution for https://github.com/relekang/python-semantic-release/issues/460#issuecomment-1192261285
 version_variable = "src/transformer_embeddings/__init__.py:__version__"
 version_toml = "pyproject.toml:tool.poetry.version"
 branch = "main"

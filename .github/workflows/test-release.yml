@@ -70,4 +70,4 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry
           poetry install --no-interaction --no-ansi --only release
-          poetry run semantic-release publish --noop
+          poetry run semantic-release publish
