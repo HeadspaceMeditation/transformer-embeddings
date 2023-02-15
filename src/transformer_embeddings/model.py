@@ -220,7 +220,9 @@ class TransformerEmbeddings:
         input = None
         pooled = None
         for i in trange(0, len(input_strings), self.batch_size):
-            batch_tokenized_input = self.tokenize(input_strings[i : i + self.batch_size])
+            batch_tokenized_input = self.tokenize(
+                input_strings[i : i + self.batch_size]
+            )
 
             with no_grad():
                 batch_outputs = self.model(**batch_tokenized_input.to(DEVICE))
@@ -289,7 +291,9 @@ class TransformerEmbeddings:
             try:
                 from s3fs import S3FileSystem
             except ImportError:
-                raise ImportError("Please install the s3 extras of the package to upload to S3.")
+                raise ImportError(
+                    "Please install the s3 extras of the package to upload to S3."
+                )
 
             s3_fs = S3FileSystem()
             logger.info(f"Tarball {compressed_file} being uploaded to S3 at {s3_path}.")
