@@ -4,7 +4,6 @@ from shutil import copy2
 from tempfile import TemporaryDirectory
 from typing import Callable, List, Optional, Tuple, Union
 
-from s3fs import S3FileSystem
 from torch import Tensor, cat, cuda, device
 from torch.autograd.grad_mode import no_grad
 from torch.nn.functional import pad
@@ -221,9 +220,7 @@ class TransformerEmbeddings:
         input = None
         pooled = None
         for i in trange(0, len(input_strings), self.batch_size):
-            batch_tokenized_input = self.tokenize(
-                input_strings[i : i + self.batch_size]
-            )
+            batch_tokenized_input = self.tokenize(input_strings[i : i + self.batch_size])
 
             with no_grad():
                 batch_outputs = self.model(**batch_tokenized_input.to(DEVICE))
@@ -289,6 +286,11 @@ class TransformerEmbeddings:
         logger.info(f"Tarball {compressed_file} created.")
 
         if s3_path:
+            try:
+                from s3fs import S3FileSystem
+            except ImportError:
+                raise ImportError("Please install the s3 extras of the package to upload to S3.")
+
             s3_fs = S3FileSystem()
             logger.info(f"Tarball {compressed_file} being uploaded to S3 at {s3_path}.")
             s3_fs.open(s3_path, "wb").write(compressed_file.read_bytes())
