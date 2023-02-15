@@ -97,7 +97,16 @@ embeddings.pooled
 
 ### Exporting the Model
 
-Once you are done testing and training the model, it can be exported into a single tarball that can be uploaded to S3 using:
+Once you are done testing and training the model, it can be exported into a single tarball:
+
+```python
+from transformer_embeddings import TransformerEmbeddings
+
+transformer = TransformerEmbeddings("model_name")
+transformer.export(additional_files=["/path/to/other/files/to/include/in/tarball.pickle"])
+```
+
+This tarball can also be uploaded to S3, but requires installing the S3 extras (`pip install transformer-embeddings[s3]`). And then using:
 
 ```python
 from transformer_embeddings import TransformerEmbeddings
