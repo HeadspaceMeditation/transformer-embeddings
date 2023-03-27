@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v3.1.1 (2023-03-27)
+
+
 ## v3.1.0 (2023-02-15)
 ### Feature
 * Separate S3 dependencies to an optional ([#16](https://github.com/ginger-io/transformer-embeddings/issues/16)) ([`036cdc8`](https://github.com/ginger-io/transformer-embeddings/commit/036cdc887ed091460921ed3edb314b71455df221))
