@@ -21,7 +21,7 @@
 
 This library simplifies and streamlines the usage of encoder transformer models supported by [HuggingFace's `transformers` library](https://github.com/huggingface/transformers/) ([model hub](https://huggingface.co/models) or local) to generate embeddings for string inputs, similar to the way `sentence-transformers` does.
 
-Please note that starting with v4, we have dropped support for Python 3.7. If you need to use this library with Python 3.7, the latest compatible release is [`version 3.1.1`](https://pypi.org/project/transformer-embeddings/3.1.1/).
+Please note that starting with v3.1.1, we have dropped support for Python 3.7. If you need to use this library with Python 3.7, the latest compatible release is [`version 3.1.0`](https://pypi.org/project/transformer-embeddings/3.1.0/).
 
 ## Why use this over HuggingFace's `transformers` or `sentence-transformers`?
 
