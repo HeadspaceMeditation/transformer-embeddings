@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v4.0.0 (2023-03-28)
+### Breaking
+* Dropping py37 support ([`9c6c81e`](https://github.com/ginger-io/transformer-embeddings/commit/9c6c81e5258ec4a72d97da60223ddd1694ea02fe))
+
+### Documentation
+* Updating docs to communicate breaking python support changes ([#18](https://github.com/ginger-io/transformer-embeddings/issues/18)) ([`9c6c81e`](https://github.com/ginger-io/transformer-embeddings/commit/9c6c81e5258ec4a72d97da60223ddd1694ea02fe))
+
 ## v3.1.1 (2023-03-27)
 
 
