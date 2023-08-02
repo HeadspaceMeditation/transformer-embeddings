@@ -5,7 +5,7 @@
 [![Python Version](https://img.shields.io/pypi/pyversions/transformer-embeddings)][python version]
 [![License](https://img.shields.io/pypi/l/transformer-embeddings)][license]
 
-[![Tests](https://github.com/ginger-io/transformer-embeddings/workflows/Tests/badge.svg?branch=main)][tests]
+[![Tests](https://github.com/HeadspaceMeditation/transformer-embeddings/workflows/Tests/badge.svg?branch=main)][tests]
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
@@ -14,8 +14,8 @@
 [status]: https://pypi.org/project/transformer-embeddings/
 [python version]: https://pypi.org/project/transformer-embeddings
 [read the docs]: https://transformer-embeddings.readthedocs.io/
-[tests]: https://github.com/ginger-io/transformer-embeddings/actions?workflow=Tests
-[codecov]: https://app.codecov.io/gh/ginger-io/transformer-embeddings
+[tests]: https://github.com/HeadspaceMeditation/transformer-embeddings/actions?workflow=Tests
+[codecov]: https://app.codecov.io/gh/HeadspaceMeditation/transformer-embeddings
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
@@ -139,11 +139,11 @@ This project was partly generated from [@cjolowicz]'s [Hypermodern Python Cookie
 [@cjolowicz]: https://github.com/cjolowicz
 [pypi]: https://pypi.org/
 [hypermodern python cookiecutter]: https://github.com/cjolowicz/cookiecutter-hypermodern-python
-[file an issue]: https://github.com/ginger-io/transformer-embeddings/issues
+[file an issue]: https://github.com/HeadspaceMeditation/transformer-embeddings/issues
 [pip]: https://pip.pypa.io/
 
 <!-- github-only -->
 
-[license]: https://github.com/ginger-io/transformer-embeddings/blob/main/LICENSE
-[contributor guide]: https://github.com/ginger-io/transformer-embeddings/blob/main/CONTRIBUTING.md
+[license]: https://github.com/HeadspaceMeditation/transformer-embeddings/blob/main/LICENSE
+[contributor guide]: https://github.com/HeadspaceMeditation/transformer-embeddings/blob/main/CONTRIBUTING.md
 [command-line reference]: https://transformer-embeddings.readthedocs.io/en/latest/usage.html
