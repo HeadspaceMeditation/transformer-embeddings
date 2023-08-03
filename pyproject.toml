@@ -5,15 +5,15 @@ description = "Transformer Embeddings"
 authors = ["Headspace Health <transformer-embeddings@headspace.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-homepage = "https://github.com/ginger-io/transformer-embeddings"
-repository = "https://github.com/ginger-io/transformer-embeddings"
-documentation = "https://github.com/ginger-io/transformer-embeddings"
+homepage = "https://github.com/HeadspaceMeditation/transformer-embeddings"
+repository = "https://github.com/HeadspaceMeditation/transformer-embeddings"
+documentation = "https://github.com/HeadspaceMeditation/transformer-embeddings"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
 ]
 
 [tool.poetry.urls]
-Changelog = "https://github.com/ginger-io/transformer-embeddings/releases"
+Changelog = "https://github.com/HeadspaceMeditation/transformer-embeddings/releases"
 
 [tool.poetry.dependencies]
 python = "^3.8,<3.11"
