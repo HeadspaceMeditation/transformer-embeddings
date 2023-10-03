@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from logging import getLogger
 from pathlib import Path
 from shutil import copy2
@@ -32,6 +33,7 @@ DEVICE = DEVICE_CUDA if cuda.is_available() else DEVICE_CPU
 TransformerInputOutput = Union[BatchEncoding, ModelOutput]
 
 
+@dataclass
 class TransformerEmbeddingsOutput(ModelOutput):
     output: Optional[ModelOutput] = None
     input: Optional[BatchEncoding] = None
