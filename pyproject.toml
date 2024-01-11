@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "transformer-embeddings"
-version = "4.0.8"
+version = "4.0.9"
 description = "Transformer Embeddings"
 authors = ["Headspace Health <transformer-embeddings@headspace.com>"]
 license = "Apache-2.0"
