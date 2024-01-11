@@ -2,6 +2,9 @@
 
 <!--next-version-placeholder-->
 
+## v4.0.7 (2024-01-11)
+
+
 ## v4.0.6 (2023-10-03)
 ### Fix
 * Fix ModelOutput subclass by adding dataclass decorator ([#32](https://github.com/HeadspaceMeditation/transformer-embeddings/issues/32)) ([`5cfd22c`](https://github.com/HeadspaceMeditation/transformer-embeddings/commit/5cfd22ce50196ec8a4e9436f40dc6a20960fe4d1))
