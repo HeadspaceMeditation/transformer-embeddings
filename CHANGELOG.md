@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v4.0.8 (2024-01-11)
+### Fix
+* Updating transformers version to resolve critical dependabot security alerts ([#39](https://github.com/HeadspaceMeditation/transformer-embeddings/issues/39)) ([`4a952ac`](https://github.com/HeadspaceMeditation/transformer-embeddings/commit/4a952acf64bb91e03fd4ee73b0fc5cfa2c032e1d))
+
 ## v4.0.7 (2024-01-11)
 
 
