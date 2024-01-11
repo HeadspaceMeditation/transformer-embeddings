@@ -17,7 +17,7 @@ Changelog = "https://github.com/HeadspaceMeditation/transformer-embeddings/relea
 
 [tool.poetry.dependencies]
 python = "^3.8,<3.11"
-transformers = "^4.23.1"
+transformers = "^4.36.0"
 torch = "^1.9.1"
 s3fs = { version = "^2023.1.0", optional = true }
 
