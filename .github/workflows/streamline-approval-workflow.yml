@@ -49,7 +49,7 @@ jobs:
         PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
 
     - name: Auto Approve
-      if: "${{ contains(steps.getLabels.outputs.allLabels, 'auto-approve') && steps.twoWeeksAgo.outputs.was_two_weeks_ago == 'TRUE'}}" 
+      if: "${{ contains(steps.getLabels.outputs.allLabels, 'auto-approve') && steps.twoWeeksAgo.outputs.was_two_weeks_ago == 'TRUE'}}"
       uses: hmarr/auto-approve-action@v4
-      with: 
+      with:
         github-token: ${{secrets.HS_APPROVER_BOT_TOKEN}}
