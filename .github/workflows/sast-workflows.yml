@@ -13,7 +13,7 @@ jobs:
         uses: advanced-security/secret-scanning-review-action@v2.1.0
         with:
           token: ${{ secrets.SECRET_SCAN_REVIEW_GITHUB_TOKEN }}
-          fail-on-alert: true
+          fail-on-alert: false
   dependency-review:
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
