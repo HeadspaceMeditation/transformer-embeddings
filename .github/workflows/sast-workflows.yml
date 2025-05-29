@@ -1,21 +1,30 @@
 name: 'SAST Scans'
+
 on:
-  push:
-    branches: ['master', 'main', 'develop']
   pull_request:
-    branches: ['master', 'main', 'develop']
+  merge_group:
+
 jobs:
   secret-scanning-review:
-    if: ${{ github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'}}
     runs-on: ubuntu-latest
+    env:
+      SAST_GH_APP_ID:           ${{ secrets.SAST_GH_APP_ID }}
+      SAST_GH_APP_PRIVATE_KEY:  ${{ secrets.SAST_GH_APP_PRIVATE_KEY }}
     steps:
-      - name: 'Secret Scanning Review Action'
+      - name: Generate GitHub App Token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id:      ${{ env.SAST_GH_APP_ID }}
+          private-key: ${{ env.SAST_GH_APP_PRIVATE_KEY }}
+      - name: Secret Scanning Review Action
         uses: advanced-security/secret-scanning-review-action@v2.1.0
         with:
-          token: ${{ secrets.SECRET_SCAN_REVIEW_GITHUB_TOKEN }}
-          fail-on-alert: false
+          token:          ${{ steps.app-token.outputs.token }}
+          fail-on-alert:  true
+          fail-on-alert-exclude-closed: true
+
   dependency-review:
-    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
