@@ -6,6 +6,7 @@ on:
 
 jobs:
   secret-scanning-review:
+    if: ${{ github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     env:
       SAST_GH_APP_ID:           ${{ secrets.SAST_GH_APP_ID }}
