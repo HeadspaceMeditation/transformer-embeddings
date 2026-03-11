@@ -19,11 +19,12 @@ jobs:
           app-id:      ${{ env.SAST_GH_APP_ID }}
           private-key: ${{ env.SAST_GH_APP_PRIVATE_KEY }}
       - name: Secret Scanning Review Action
-        uses: advanced-security/secret-scanning-review-action@v2.1.0
+        uses: advanced-security/secret-scanning-review-action@v2.2.4
         with:
           token:          ${{ steps.app-token.outputs.token }}
           fail-on-alert:  true
           fail-on-alert-exclude-closed: true
+          skip-closed-alerts: true
 
   dependency-review:
     runs-on: ubuntu-latest
