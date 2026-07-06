@@ -29,6 +29,11 @@ jobs:
           skip-closed-alerts: true
 
   dependency-review:
+    if: >-
+      github.actor != 'dependabot[bot]' &&
+      (github.event_name != 'pull_request' ||
+        (!startsWith(github.head_ref, 'dependabot/') &&
+         !startsWith(github.head_ref, 'security/fix-')))
     permissions:
       contents: read
       pull-requests: write
