@@ -1,3 +1,4 @@
+module.exports = async ({ github, context, core }) => {
 const COMMENT_MARKER = process.env.COMMENT_MARKER;
 const SEVERITY_COLUMNS = ['critical', 'high'];
 const HIGH_CRITICAL_SEVERITIES = new Set(SEVERITY_COLUMNS);
@@ -199,3 +200,4 @@ core.info(
   `Open critical/high alerts: ${totalOpenAlerts} ` +
     `(Dependabot: ${dependabotHighCriticalTotal}, CodeQL: ${codeqlHighCriticalTotal}).`
 );
+};
