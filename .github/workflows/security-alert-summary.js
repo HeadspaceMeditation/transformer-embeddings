@@ -69,7 +69,7 @@ core.info(`Checking security alerts for ${repositoryName}...`);
 try {
   dependabotAlerts = await github.paginate(
     github.rest.dependabot.listAlertsForRepo,
-    { owner, repo, state: 'open', per_page: 100 }
+    { owner, repo, state: 'open', severity: 'critical,high', per_page: 100 }
   );
 } catch (error) {
   const message = `Dependabot alerts: ${error.message}`;
@@ -158,7 +158,6 @@ if (errors.length > 0) {
 
 if (context.eventName === 'pull_request') {
   const issueNumber = context.payload.pull_request.number;
-  core.info(`Updating PR #${issueNumber} comment...`);
 
   const { data: comments } = await github.rest.issues.listComments({
     owner,
@@ -171,22 +170,33 @@ if (context.eventName === 'pull_request') {
     (c.body || '').includes(COMMENT_MARKER)
   );
 
-  if (existing) {
-    await github.rest.issues.updateComment({
+  if (totalOpenAlerts > 0) {
+    if (existing) {
+      await github.rest.issues.updateComment({
+        owner,
+        repo,
+        comment_id: existing.id,
+        body: commentBody,
+      });
+      core.info(`Updated existing PR comment ${existing.id}`);
+    } else {
+      await github.rest.issues.createComment({
+        owner,
+        repo,
+        issue_number: issueNumber,
+        body: commentBody,
+      });
+      core.info('Created new PR comment');
+    }
+  } else if (existing) {
+    await github.rest.issues.deleteComment({
       owner,
       repo,
       comment_id: existing.id,
-      body: commentBody,
     });
-    core.info(`Updated existing PR comment ${existing.id}`);
+    core.info(`Deleted stale PR comment ${existing.id} (no open alerts)`);
   } else {
-    await github.rest.issues.createComment({
-      owner,
-      repo,
-      issue_number: issueNumber,
-      body: commentBody,
-    });
-    core.info('Created new PR comment');
+    core.info('No open critical/high alerts — skipping PR comment.');
   }
 } else {
   core.info(
