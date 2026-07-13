@@ -11,13 +11,6 @@ on:
       - master
       - main
       - develop
-  push:
-    branches:
-      - master
-      - main
-      - develop
-  schedule:
-    - cron: '0 9 * * *'
 
 concurrency:
   group: security-alert-summary-${{ github.workflow }}-${{ github.ref }}
@@ -34,7 +27,7 @@ jobs:
     env:
       SAST_GH_APP_ID: ${{ secrets.SAST_GH_APP_ID }}
       SAST_GH_APP_PRIVATE_KEY: ${{ secrets.SAST_GH_APP_PRIVATE_KEY }}
-      COMMENT_MARKER: '<!-- security-alert-summary -->'
+      COMMENT_MARKER: "<!-- security-alert-summary -->"
 
     steps:
       - name: Checkout
