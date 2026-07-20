@@ -141,8 +141,10 @@ if (errors.length > 0) {
   core.summary.addRaw(errors.map((e) => `- ${e}`).join("\n"))
 }
 
-if (context.eventName === "pull_request") {
-  const issueNumber = context.payload.pull_request.number
+const prNumber = context.payload.pull_request?.number ?? (process.env.PR_NUMBER ? parseInt(process.env.PR_NUMBER, 10) : null)
+
+if (prNumber) {
+  const issueNumber = prNumber
 
   const { data: comments } = await github.rest.issues.listComments({
     owner,
@@ -182,7 +184,7 @@ if (context.eventName === "pull_request") {
     core.info("No open critical/high alerts — skipping PR comment.")
   }
 } else {
-  core.info("Non-PR event: summary written to job output only (no PR comment).")
+  core.info("No PR number available: summary written to job output only (no PR comment).")
 }
 
 const dependabotHighCriticalTotal = rowTotal(dependabotCounts)
